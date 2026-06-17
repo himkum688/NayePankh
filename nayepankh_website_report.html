@@ -1,0 +1,1666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NayePankh Foundation — Website Analysis Report</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap');
+
+  :root {
+    --ink: #1a1a2e;
+    --ink-light: #4a4a6a;
+    --ink-muted: #8a8aaa;
+    --bg: #f8f7f4;
+    --bg-card: #ffffff;
+    --accent-blue: #2563eb;
+    --accent-teal: #0d9488;
+    --accent-amber: #d97706;
+    --accent-rose: #e11d48;
+    --accent-green: #16a34a;
+    --border: #e5e4e0;
+    --tag-bg: #eef2ff;
+    --tag-text: #3730a3;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.7;
+    font-size: 15px;
+  }
+
+  /* ── HEADER ── */
+  .report-header {
+    background: var(--ink);
+    color: white;
+    padding: 56px 48px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .report-header::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.07);
+  }
+
+  .report-header::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: 200px;
+    width: 240px; height: 240px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .report-meta {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+    margin-bottom: 16px;
+  }
+
+  .report-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 38px;
+    line-height: 1.2;
+    margin-bottom: 12px;
+    font-weight: 700;
+  }
+
+  .report-title span {
+    color: #60a5fa;
+  }
+
+  .report-sub {
+    font-size: 15px;
+    color: rgba(255,255,255,0.6);
+    max-width: 560px;
+    margin-bottom: 32px;
+    font-weight: 300;
+  }
+
+  .header-pills {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .header-pill {
+    padding: 5px 14px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.15);
+    font-size: 12px;
+    color: rgba(255,255,255,0.7);
+    letter-spacing: 0.04em;
+  }
+
+  /* ── NAVIGATION ── */
+  .toc {
+    background: white;
+    border-bottom: 1px solid var(--border);
+    padding: 0 48px;
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .toc a {
+    display: block;
+    padding: 16px 20px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink-light);
+    text-decoration: none;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: all 0.15s;
+  }
+
+  .toc a:hover {
+    color: var(--accent-blue);
+    border-bottom-color: var(--accent-blue);
+  }
+
+  /* ── LAYOUT ── */
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 48px 80px;
+  }
+
+  section {
+    padding-top: 64px;
+  }
+
+  .section-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 24px;
+    color: var(--ink);
+    line-height: 1.3;
+  }
+
+  .section-intro {
+    font-size: 15px;
+    color: var(--ink-light);
+    max-width: 680px;
+    margin-bottom: 32px;
+    line-height: 1.75;
+  }
+
+  /* ── OVERVIEW STATS ── */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin: 32px 0;
+  }
+
+  .stat-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 18px;
+  }
+
+  .stat-number {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 4px;
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 12px;
+    color: var(--ink-muted);
+    line-height: 1.4;
+  }
+
+  .stat-icon {
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 12px;
+    font-size: 16px;
+  }
+
+  /* ── RATING METER ── */
+  .rating-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  .rating-label {
+    width: 200px;
+    font-size: 13px;
+    color: var(--ink-light);
+    flex-shrink: 0;
+  }
+
+  .rating-bar-bg {
+    flex: 1;
+    height: 6px;
+    background: var(--border);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .rating-bar-fill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.8s ease;
+  }
+
+  .rating-score {
+    font-size: 13px;
+    font-weight: 600;
+    width: 36px;
+    text-align: right;
+    color: var(--ink);
+  }
+
+  /* ── SCREENSHOT MOCKUP ── */
+  .mockup-frame {
+    background: #1a1a1a;
+    border-radius: 12px;
+    padding: 10px;
+    margin: 24px 0;
+  }
+
+  .mockup-bar {
+    background: #2a2a2a;
+    border-radius: 6px;
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+
+  .mockup-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+  }
+
+  .mockup-url {
+    flex: 1;
+    background: #3a3a3a;
+    border-radius: 4px;
+    padding: 4px 10px;
+    font-size: 11px;
+    color: #888;
+    text-align: center;
+  }
+
+  .mockup-screen {
+    border-radius: 6px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* ── CURRENT SITE MOCKUP ── */
+  .current-site {
+    background: #ffffff;
+    font-family: sans-serif;
+  }
+
+  .cs-nav {
+    background: white;
+    border-bottom: 2px solid #1a1a2e;
+    padding: 12px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .cs-nav-logo {
+    font-size: 13px;
+    font-weight: 700;
+    color: #1a1a2e;
+  }
+
+  .cs-nav-links {
+    display: flex;
+    gap: 16px;
+  }
+
+  .cs-nav-link {
+    font-size: 11px;
+    color: #555;
+  }
+
+  .cs-hero {
+    position: relative;
+    height: 160px;
+    background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.55)), #4a5568;
+    display: flex;
+    align-items: flex-end;
+    padding: 20px 24px;
+  }
+
+  .cs-hero-text {
+    color: white;
+  }
+
+  .cs-hero-h1 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  .cs-hero-btn {
+    background: #e53e3e;
+    color: white;
+    font-size: 10px;
+    padding: 5px 12px;
+    border-radius: 4px;
+    display: inline-block;
+  }
+
+  .cs-body {
+    padding: 20px 24px;
+  }
+
+  .cs-section-label {
+    font-size: 10px;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+  }
+
+  .cs-section-h2 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #1a1a2e;
+  }
+
+  .cs-para {
+    font-size: 11px;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+
+  /* ── ANNOTATIONS ── */
+  .annotation-wrap {
+    position: relative;
+  }
+
+  .annotation {
+    position: absolute;
+    background: var(--accent-rose);
+    color: white;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 12px;
+    white-space: nowrap;
+    z-index: 10;
+  }
+
+  .annotation::before {
+    content: '';
+    position: absolute;
+    width: 1px;
+    background: var(--accent-rose);
+  }
+
+  /* ── FINDING CARDS ── */
+  .findings-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 24px 0;
+  }
+
+  .finding-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+  }
+
+  .finding-card.positive {
+    border-left: 3px solid var(--accent-green);
+  }
+
+  .finding-card.negative {
+    border-left: 3px solid var(--accent-rose);
+  }
+
+  .finding-card.suggestion {
+    border-left: 3px solid var(--accent-blue);
+  }
+
+  .finding-card.project {
+    border-left: 3px solid var(--accent-amber);
+  }
+
+  .finding-icon {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+
+  .finding-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+
+  .finding-body {
+    font-size: 13px;
+    color: var(--ink-light);
+    line-height: 1.65;
+  }
+
+  /* ── IMPROVEMENT ITEMS ── */
+  .improvement-item {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 16px;
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    gap: 20px;
+    align-items: start;
+  }
+
+  .improvement-number {
+    width: 48px; height: 48px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .improvement-number.blue { background: #eff6ff; color: var(--accent-blue); }
+  .improvement-number.teal { background: #f0fdfa; color: var(--accent-teal); }
+  .improvement-number.amber { background: #fffbeb; color: var(--accent-amber); }
+  .improvement-number.rose { background: #fff1f2; color: var(--accent-rose); }
+  .improvement-number.green { background: #f0fdf4; color: var(--accent-green); }
+
+  .improvement-content {}
+
+  .improvement-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+
+  .improvement-desc {
+    font-size: 14px;
+    color: var(--ink-light);
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+
+  .improvement-before-after {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 12px;
+  }
+
+  .ba-box {
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 12px;
+  }
+
+  .ba-box.before {
+    background: #fff1f2;
+    border: 1px solid #fecdd3;
+  }
+
+  .ba-box.after {
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+  }
+
+  .ba-label {
+    font-weight: 600;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 4px;
+  }
+
+  .ba-box.before .ba-label { color: var(--accent-rose); }
+  .ba-box.after .ba-label { color: var(--accent-green); }
+
+  .ba-text {
+    color: var(--ink-light);
+    line-height: 1.5;
+  }
+
+  /* ── NEW SECTIONS ── */
+  .new-section-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 16px;
+  }
+
+  .new-section-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 12px;
+  }
+
+  .new-section-icon {
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+
+  .new-section-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .new-section-tag {
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    background: var(--tag-bg);
+    color: var(--tag-text);
+    font-weight: 500;
+    margin-left: auto;
+  }
+
+  .new-section-body {
+    font-size: 14px;
+    color: var(--ink-light);
+    line-height: 1.7;
+  }
+
+  /* ── PROPOSED REDESIGN MOCKUP ── */
+  .redesign-screen {
+    background: #f8f9fa;
+    font-family: sans-serif;
+  }
+
+  .rd-nav {
+    background: #1a1a2e;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .rd-logo {
+    color: white;
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  .rd-nav-links {
+    display: flex;
+    gap: 14px;
+  }
+
+  .rd-nav-link {
+    color: rgba(255,255,255,0.7);
+    font-size: 11px;
+  }
+
+  .rd-nav-link.active {
+    color: #60a5fa;
+  }
+
+  .rd-nav-cta {
+    background: #2563eb;
+    color: white;
+    font-size: 10px;
+    padding: 5px 12px;
+    border-radius: 5px;
+  }
+
+  .rd-hero {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    padding: 32px 20px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
+
+  .rd-hero-left {
+    flex: 1;
+  }
+
+  .rd-hero-badge {
+    display: inline-block;
+    background: rgba(96,165,250,0.15);
+    color: #93c5fd;
+    font-size: 10px;
+    padding: 3px 10px;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    letter-spacing: 0.06em;
+    border: 1px solid rgba(96,165,250,0.3);
+  }
+
+  .rd-hero-h1 {
+    font-size: 22px;
+    font-weight: 700;
+    color: white;
+    line-height: 1.3;
+    margin-bottom: 8px;
+  }
+
+  .rd-hero-sub {
+    font-size: 11px;
+    color: rgba(255,255,255,0.55);
+    margin-bottom: 16px;
+    line-height: 1.6;
+  }
+
+  .rd-hero-btns {
+    display: flex;
+    gap: 8px;
+  }
+
+  .rd-btn-primary {
+    background: #2563eb;
+    color: white;
+    font-size: 11px;
+    padding: 7px 16px;
+    border-radius: 6px;
+  }
+
+  .rd-btn-secondary {
+    background: rgba(255,255,255,0.08);
+    color: white;
+    font-size: 11px;
+    padding: 7px 16px;
+    border-radius: 6px;
+    border: 1px solid rgba(255,255,255,0.15);
+  }
+
+  .rd-stats-bar {
+    display: flex;
+    gap: 0;
+  }
+
+  .rd-stat {
+    text-align: center;
+    padding: 6px 16px;
+    border-right: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .rd-stat:last-child { border-right: none; }
+
+  .rd-stat-num {
+    font-size: 18px;
+    font-weight: 700;
+    color: white;
+  }
+
+  .rd-stat-label {
+    font-size: 9px;
+    color: rgba(255,255,255,0.4);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .rd-impact-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    background: white;
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  .rd-impact-cell {
+    padding: 14px 16px;
+    border-right: 1px solid #e5e7eb;
+    text-align: center;
+  }
+
+  .rd-impact-cell:last-child { border-right: none; }
+
+  .rd-impact-icon {
+    font-size: 20px;
+    margin-bottom: 4px;
+  }
+
+  .rd-impact-title {
+    font-size: 11px;
+    font-weight: 600;
+    color: #1a1a2e;
+    margin-bottom: 2px;
+  }
+
+  .rd-impact-desc {
+    font-size: 9px;
+    color: #888;
+  }
+
+  .rd-progress-section {
+    background: white;
+    padding: 16px 20px;
+    margin-top: 1px;
+  }
+
+  .rd-progress-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: #1a1a2e;
+    margin-bottom: 10px;
+  }
+
+  .rd-progress-item {
+    margin-bottom: 8px;
+  }
+
+  .rd-progress-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    color: #666;
+    margin-bottom: 3px;
+  }
+
+  .rd-progress-bar {
+    height: 5px;
+    background: #f3f4f6;
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .rd-progress-fill {
+    height: 100%;
+    border-radius: 3px;
+  }
+
+  /* ── PROJECT SECTION ── */
+  .project-card {
+    background: var(--ink);
+    color: white;
+    border-radius: 16px;
+    padding: 36px;
+    margin: 24px 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .project-card::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .project-card::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; left: 100px;
+    width: 280px; height: 280px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.04);
+  }
+
+  .project-tag {
+    display: inline-block;
+    background: rgba(96,165,250,0.15);
+    color: #93c5fd;
+    font-size: 11px;
+    padding: 4px 12px;
+    border-radius: 12px;
+    margin-bottom: 16px;
+    border: 1px solid rgba(96,165,250,0.25);
+    letter-spacing: 0.05em;
+  }
+
+  .project-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    line-height: 1.3;
+  }
+
+  .project-desc {
+    font-size: 15px;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.75;
+    margin-bottom: 28px;
+    max-width: 640px;
+  }
+
+  .project-features {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+
+  .project-feature {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 10px;
+    padding: 16px;
+  }
+
+  .project-feature-title {
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #93c5fd;
+  }
+
+  .project-feature-desc {
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.6;
+  }
+
+  .project-impact-list {
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 24px;
+  }
+
+  .project-impact-title {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.35);
+    margin-bottom: 14px;
+  }
+
+  .project-impact-items {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .project-impact-item {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.75);
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 0;
+  }
+
+  /* ── SUMMARY TABLE ── */
+  .summary-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+  }
+
+  .summary-table th {
+    background: var(--ink);
+    color: white;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 10px 16px;
+    text-align: left;
+  }
+
+  .summary-table th:first-child { border-radius: 8px 0 0 0; }
+  .summary-table th:last-child { border-radius: 0 8px 0 0; }
+
+  .summary-table td {
+    font-size: 13px;
+    color: var(--ink-light);
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .summary-table tr:nth-child(even) td { background: #fafafa; }
+
+  .priority-badge {
+    font-size: 11px;
+    padding: 2px 9px;
+    border-radius: 10px;
+    font-weight: 500;
+    display: inline-block;
+  }
+
+  .priority-high { background: #fff1f2; color: #e11d48; }
+  .priority-medium { background: #fffbeb; color: #d97706; }
+  .priority-low { background: #f0fdf4; color: #16a34a; }
+
+  /* ── FOOTER ── */
+  .report-footer {
+    background: var(--ink);
+    color: rgba(255,255,255,0.45);
+    padding: 32px 48px;
+    font-size: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-brand {
+    font-weight: 600;
+    color: white;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 700px) {
+    .container { padding: 0 20px 60px; }
+    .report-header { padding: 36px 20px 32px; }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .findings-grid { grid-template-columns: 1fr; }
+    .improvement-before-after { grid-template-columns: 1fr; }
+    .project-features { grid-template-columns: 1fr; }
+    .report-footer { flex-direction: column; gap: 8px; text-align: center; }
+    .toc { padding: 0 20px; }
+    .report-title { font-size: 26px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════ HEADER -->
+<div class="report-header">
+  <div class="report-meta">Website Analysis Report · June 2026</div>
+  <h1 class="report-title">NayePankh Foundation<br><span>Website Review</span></h1>
+  <p class="report-sub">A detailed UX, design, and feature analysis of nayepankh.com with actionable recommendations to amplify the NGO's digital impact.</p>
+  <div class="header-pills">
+    <span class="header-pill">🌐 nayepankh.com</span>
+    <span class="header-pill">UP Govt. Reg. NGO</span>
+    <span class="header-pill">Student-Led Organisation</span>
+    <span class="header-pill">Kanpur, India</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ TOC -->
+<nav class="toc">
+  <a href="#overview">Overview</a>
+  <a href="#liked">What Works</a>
+  <a href="#improvements">Improvements</a>
+  <a href="#new-sections">New Sections</a>
+  <a href="#redesign">Redesign Preview</a>
+  <a href="#project">Suggested Project</a>
+  <a href="#summary">Summary</a>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════════ BODY -->
+<div class="container">
+
+  <!-- ── OVERVIEW ── -->
+  <section id="overview">
+    <div class="section-eyebrow">Section 01 · Overview</div>
+    <h2 class="section-title">Current Website at a Glance</h2>
+    <p class="section-intro">The NayePankh Foundation website is built on Hostinger's Website Builder (Zyrosite). It serves as a digital front for India's one of the largest student-led NGOs, which has helped over 2 lakh underprivileged people since 2021. Here's how it scores today:</p>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon" style="background:#eff6ff;">📄</div>
+        <div class="stat-number">5</div>
+        <div class="stat-label">Total pages on the site</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon" style="background:#fff1f2;">🎨</div>
+        <div class="stat-number">4/10</div>
+        <div class="stat-label">Design quality score</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon" style="background:#f0fdf4;">🤝</div>
+        <div class="stat-number">30K+</div>
+        <div class="stat-label">Interns trained</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon" style="background:#fffbeb;">📰</div>
+        <div class="stat-number">3+</div>
+        <div class="stat-label">Major newspaper features</div>
+      </div>
+    </div>
+
+    <!-- Rating bars -->
+    <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin: 16px 0;">
+      <p style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 18px;">Current Website Scorecard</p>
+
+      <div class="rating-row">
+        <div class="rating-label">Visual Design</div>
+        <div class="rating-bar-bg"><div class="rating-bar-fill" style="width: 35%; background: #e11d48;"></div></div>
+        <div class="rating-score" style="color: #e11d48;">3.5</div>
+      </div>
+      <div class="rating-row">
+        <div class="rating-label">Content Quality</div>
+        <div class="rating-bar-bg"><div class="rating-bar-fill" style="width: 60%; background: #d97706;"></div></div>
+        <div class="rating-score" style="color: #d97706;">6.0</div>
+      </div>
+      <div class="rating-row">
+        <div class="rating-label">Navigation / UX</div>
+        <div class="rating-bar-bg"><div class="rating-bar-fill" style="width: 40%; background: #e11d48;"></div></div>
+        <div class="rating-score" style="color: #e11d48;">4.0</div>
+      </div>
+      <div class="rating-row">
+        <div class="rating-label">Trust & Credibility</div>
+        <div class="rating-bar-bg"><div class="rating-bar-fill" style="width: 55%; background: #d97706;"></div></div>
+        <div class="rating-score" style="color: #d97706;">5.5</div>
+      </div>
+      <div class="rating-row">
+        <div class="rating-label">Mobile Friendliness</div>
+        <div class="rating-bar-bg"><div class="rating-bar-fill" style="width: 50%; background: #d97706;"></div></div>
+        <div class="rating-score" style="color: #d97706;">5.0</div>
+      </div>
+      <div class="rating-row">
+        <div class="rating-label">Donation Experience</div>
+        <div class="rating-bar-bg"><div class="rating-bar-fill" style="width: 30%; background: #e11d48;"></div></div>
+        <div class="rating-score" style="color: #e11d48;">3.0</div>
+      </div>
+      <div class="rating-row">
+        <div class="rating-label">SEO & Accessibility</div>
+        <div class="rating-bar-bg"><div class="rating-bar-fill" style="width: 40%; background: #e11d48;"></div></div>
+        <div class="rating-score" style="color: #e11d48;">4.0</div>
+      </div>
+
+      <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center;">
+        <span style="font-size: 13px; color: var(--ink-muted);">Overall Score</span>
+        <span style="font-size: 22px; font-weight: 700; color: #d97706;">4.4 / 10</span>
+      </div>
+    </div>
+
+    <!-- Current site screenshot mockup -->
+    <p style="font-size: 13px; color: var(--ink-muted); margin-top: 28px; margin-bottom: 10px; font-weight: 500;">📸 Current Site — Visual Snapshot (Annotated)</p>
+    <div class="mockup-frame">
+      <div class="mockup-bar">
+        <span class="mockup-dot" style="background:#ff5f56;"></span>
+        <span class="mockup-dot" style="background:#ffbd2e;"></span>
+        <span class="mockup-dot" style="background:#27c93f;"></span>
+        <span class="mockup-url">nayepankh.com</span>
+      </div>
+      <div class="mockup-screen" style="position: relative;">
+        <!-- Annotated current site mockup -->
+        <div class="current-site">
+          <div class="cs-nav">
+            <div class="cs-nav-logo">NayePankh Foundation | GOVT. REG. NGO</div>
+            <div class="cs-nav-links">
+              <span class="cs-nav-link">Home</span>
+              <span class="cs-nav-link">About Us</span>
+              <span class="cs-nav-link">Our Certificates</span>
+              <span class="cs-nav-link">NewsPaper-Recognition</span>
+              <span class="cs-nav-link">Donate</span>
+            </div>
+          </div>
+
+          <div class="cs-hero" style="position:relative;">
+            <div class="cs-hero-text">
+              <div class="cs-hero-h1">It's that easy to bring a Smile on Their Faces</div>
+              <div class="cs-hero-btn">Donate Now</div>
+            </div>
+            <!-- Annotation bubbles -->
+            <div style="position:absolute; top:8px; right:8px; background:#e11d48; color:white; font-size:10px; font-weight:600; padding:3px 8px; border-radius:10px;">⚠ Generic WhatsApp photo used</div>
+            <div style="position:absolute; bottom:8px; right:8px; background:#e11d48; color:white; font-size:10px; font-weight:600; padding:3px 8px; border-radius:10px;">⚠ No impact stats on hero</div>
+          </div>
+
+          <div class="cs-body" style="position:relative;">
+            <div style="position:absolute; top:8px; right:8px; background:#e11d48; color:white; font-size:10px; font-weight:600; padding:3px 8px; border-radius:10px;">⚠ Typo: "CERITIFICATES"</div>
+            <div class="cs-section-label">About us</div>
+            <div class="cs-section-h2">Think global, Act local.</div>
+            <div class="cs-para">"NayePankh Foundation" is a non governmental organisation with a strong desire to help the society and make it a better place for all…</div>
+
+            <div style="display:flex; gap:8px; margin-bottom: 12px;">
+              <div style="background:#e2e8f0; font-size:10px; padding:5px 12px; border-radius:4px; color:#555;">LEARN MORE</div>
+              <div style="background:#e2e8f0; font-size:10px; padding:5px 12px; border-radius:4px; color:#555;">OUR CERITIFICATES</div>
+            </div>
+
+            <div style="position:relative; display:inline-block; width:100%;">
+              <div style="background:#f7fafc; border:1px solid #e2e8f0; border-radius:6px; padding:12px; font-size:11px; color:#888; text-align:center; margin-bottom:10px;">
+                [ WhatsApp image used as decorative background — low resolution ]
+              </div>
+              <div style="position:absolute; top:4px; right:4px; background:#e11d48; color:white; font-size:10px; font-weight:600; padding:2px 7px; border-radius:8px;">⚠ Low-res image</div>
+            </div>
+
+            <div class="cs-section-h2" style="margin-top:8px;">Welcome to NayePankh Foundation</div>
+            <div class="cs-para">We are one of the Biggest Student led NGO of India with its operations extended in the city of Kanpur, Ghaziabad and various other cities.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" style="margin-top: 48px;">
+
+  <!-- ── WHAT WORKS ── -->
+  <section id="liked">
+    <div class="section-eyebrow">Section 02 · Strengths</div>
+    <h2 class="section-title">What Works Well ✅</h2>
+    <p class="section-intro">Despite the design gaps, the NayePankh website has a genuine foundation to build on. Here's what deserves recognition:</p>
+
+    <div class="findings-grid">
+      <div class="finding-card positive">
+        <div class="finding-icon">🏛️</div>
+        <div class="finding-title">Trust Signals are Present</div>
+        <div class="finding-body">The site clearly displays UP Govt registration, 80G & 12A certification, and newspaper recognitions (Pioneer, Dainik Jagran, Hindustan). These are powerful credibility markers that many NGO sites miss entirely.</div>
+      </div>
+      <div class="finding-card positive">
+        <div class="finding-icon">📖</div>
+        <div class="finding-title">Authentic Origin Story</div>
+        <div class="finding-body">The About Us page tells a heartfelt story of starting during COVID-19, founded by high schoolers. This genuinely sets the org apart. Real, emotional storytelling is hard to manufacture.</div>
+      </div>
+      <div class="finding-card positive">
+        <div class="finding-icon">🌱</div>
+        <div class="finding-title">Mission is Clear</div>
+        <div class="finding-body">The core message — uplifting the underprivileged through food, sanitary pads, clothes, and education — is consistently communicated across pages. No ambiguity about what the org does.</div>
+      </div>
+      <div class="finding-card positive">
+        <div class="finding-icon">📲</div>
+        <div class="finding-title">Social Media Presence</div>
+        <div class="finding-body">Instagram, LinkedIn, YouTube, Facebook, and Twitter links are all present in the footer. The foundation has understood that social proof extends beyond the website itself.</div>
+      </div>
+      <div class="finding-card positive">
+        <div class="finding-icon">🧾</div>
+        <div class="finding-title">Tax Exemption Mentioned</div>
+        <div class="finding-body">The site mentions 80G tax benefits to donors — a key motivator for Indian donors that many NGO sites forget to highlight prominently.</div>
+      </div>
+      <div class="finding-card positive">
+        <div class="finding-icon">📞</div>
+        <div class="finding-title">Contact Info is Visible</div>
+        <div class="finding-body">Phone number (+91-8318500748) and email (contact@nayepankh.com) appear on multiple pages, making it easy to reach out — a basic but often forgotten essential.</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" style="margin-top: 48px;">
+
+  <!-- ── IMPROVEMENTS ── -->
+  <section id="improvements">
+    <div class="section-eyebrow">Section 03 · Design & UX Issues</div>
+    <h2 class="section-title">What Needs Improvement 🔧</h2>
+    <p class="section-intro">The following are the most critical issues, ordered by impact. Each includes a "before vs after" view of the recommendation.</p>
+
+    <!-- 1 -->
+    <div class="improvement-item">
+      <div class="improvement-number blue">01</div>
+      <div class="improvement-content">
+        <div class="improvement-title">Replace WhatsApp Images with Professional Photography</div>
+        <div class="improvement-desc">Every image on the site appears to be exported from WhatsApp, visible from the compressed quality and filename hints in the CDN URLs. This is the single biggest credibility drain. For an NGO that works with 30,000+ interns and has media coverage, professional event photos should be accessible.</div>
+        <div class="improvement-before-after">
+          <div class="ba-box before">
+            <div class="ba-label">Currently</div>
+            <div class="ba-text">Low-resolution WhatsApp group photos used as hero and section backgrounds. Pixelated on desktop screens.</div>
+          </div>
+          <div class="ba-box after">
+            <div class="ba-label">Recommended</div>
+            <div class="ba-text">Curated high-resolution event photos, compressed properly via tools like TinyPNG. Hero should show volunteers with beneficiaries.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2 -->
+    <div class="improvement-item">
+      <div class="improvement-number rose">02</div>
+      <div class="improvement-content">
+        <div class="improvement-title">Fix Spelling Errors Immediately</div>
+        <div class="improvement-desc">A button on the homepage reads "OUR CERITIFICATES" — a glaring typo for an NGO that presents itself as professional and government-certified. There are also grammatical inconsistencies across the About page. These erode trust instantly.</div>
+        <div class="improvement-before-after">
+          <div class="ba-box before">
+            <div class="ba-label">Currently</div>
+            <div class="ba-text">"OUR CERITIFICATES" button on homepage. Several informal sentence constructions on About page.</div>
+          </div>
+          <div class="ba-box after">
+            <div class="ba-label">Recommended</div>
+            <div class="ba-text">Run all text through Grammarly, fix all typos, and adopt consistent, professional tone. Quick 30-minute fix.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3 -->
+    <div class="improvement-item">
+      <div class="improvement-number amber">03</div>
+      <div class="improvement-content">
+        <div class="improvement-title">Redesign the Donation Page — It Has No Donate Button</div>
+        <div class="improvement-desc">The most critical page for an NGO is the donate page. Currently it has a long emotional letter, some photos, and text saying "Click on the button below to donate to Us" — but no working payment gateway or a clear, visible button with an amount. This directly kills conversions.</div>
+        <div class="improvement-before-after">
+          <div class="ba-box before">
+            <div class="ba-label">Currently</div>
+            <div class="ba-text">Long letter of appeal, no donation amounts shown, no payment method options visible, no "donate ₹100 / ₹500 / ₹1000" quick options.</div>
+          </div>
+          <div class="ba-box after">
+            <div class="ba-label">Recommended</div>
+            <div class="ba-text">Prominent preset amounts (₹100, ₹500, ₹1000, Custom), Razorpay/UPI integration, a progress bar showing this month's goal, and 80G receipt mention.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4 -->
+    <div class="improvement-item">
+      <div class="improvement-number teal">04</div>
+      <div class="improvement-content">
+        <div class="improvement-title">Add a Real Impact Counter with Live Numbers</div>
+        <div class="improvement-desc">The homepage mentions "2 lakh people helped" only in text. Animated counter widgets showing meals distributed, interns trained, and clothes donated would create immediate emotional impact and demonstrate scale. Organisations like GiveIndia and Milaap use this effectively.</div>
+        <div class="improvement-before-after">
+          <div class="ba-box before">
+            <div class="ba-label">Currently</div>
+            <div class="ba-text">Impact numbers mentioned in paragraph text only. Easily missed while scrolling.</div>
+          </div>
+          <div class="ba-box after">
+            <div class="ba-label">Recommended</div>
+            <div class="ba-text">Animated counter section: "2,00,000+ People Helped · 30,000 Interns · 3 Cities · Since 2021" displayed as large, bold, scroll-triggered numbers.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5 -->
+    <div class="improvement-item">
+      <div class="improvement-number green">05</div>
+      <div class="improvement-content">
+        <div class="improvement-title">Redesign Navigation — Too Cluttered & Inconsistent</div>
+        <div class="improvement-desc">The navbar has "NewsPaper-Recognition" as a page name (inconsistent capitalisation, hyphen in URL looks unprofessional). The Join Us link on the homepage actually goes to the Donate page — confusing for users who want to volunteer rather than donate.</div>
+        <div class="improvement-before-after">
+          <div class="ba-box before">
+            <div class="ba-label">Currently</div>
+            <div class="ba-text">5-item nav with "NewsPaper-Recognition" and a broken "Join Us" CTA that redirects to Donate. No search. No hamburger menu on mobile.</div>
+          </div>
+          <div class="ba-box after">
+            <div class="ba-label">Recommended</div>
+            <div class="ba-text">Clean nav: Home · About · Our Work · Internships · Donate (highlighted). Separate "Volunteer" and "Donate" flows entirely. Mobile hamburger menu.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6 -->
+    <div class="improvement-item">
+      <div class="improvement-number blue">06</div>
+      <div class="improvement-content">
+        <div class="improvement-title">Typography & Colour System Needs a Refresh</div>
+        <div class="improvement-desc">The site uses default Hostinger/Zyrosite fonts with no deliberate typographic hierarchy. Headers, body text, and CTAs feel undifferentiated. There's no consistent brand colour palette — red, white, and generic sans-serif doesn't signal "trusted NGO," it signals "default template."</div>
+        <div class="improvement-before-after">
+          <div class="ba-box before">
+            <div class="ba-label">Currently</div>
+            <div class="ba-text">Default builder fonts, red CTA buttons that clash with a serious NGO context, no defined brand palette.</div>
+          </div>
+          <div class="ba-box after">
+            <div class="ba-label">Recommended</div>
+            <div class="ba-text">Deep navy (#1a1a2e) + warm white + sky blue accent. Inter for body, a humanist serif for headings. Conveys trust and warmth simultaneously.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" style="margin-top: 48px;">
+
+  <!-- ── NEW SECTIONS ── -->
+  <section id="new-sections">
+    <div class="section-eyebrow">Section 04 · New Sections & Features</div>
+    <h2 class="section-title">What Should Be Added 🆕</h2>
+    <p class="section-intro">The current site is missing several pages and features that NGOs of this scale and credibility should have. Here are the highest-priority additions:</p>
+
+    <div class="new-section-card">
+      <div class="new-section-header">
+        <div class="new-section-icon" style="background:#eff6ff;">📊</div>
+        <div class="new-section-title">Live Impact Dashboard</div>
+        <span class="new-section-tag">High Priority</span>
+      </div>
+      <div class="new-section-body">A dedicated page showing real-time or regularly updated impact metrics: meals distributed, drives conducted, interns trained, cities covered, and year-wise growth. Include downloadable annual impact reports. This builds donor confidence and attracts CSR partnerships.</div>
+    </div>
+
+    <div class="new-section-card">
+      <div class="new-section-header">
+        <div class="new-section-icon" style="background:#f0fdfa;">🎓</div>
+        <div class="new-section-title">Internship & Volunteer Portal</div>
+        <span class="new-section-tag">High Priority</span>
+      </div>
+      <div class="new-section-body">A structured internship application page with eligibility criteria, program duration, expected outcomes, certificate preview, and an online application form. NayePankh has trained 30,000+ interns — this is a major recruitment channel that currently has no dedicated home. Include a searchable intern testimonials section.</div>
+    </div>
+
+    <div class="new-section-card">
+      <div class="new-section-header">
+        <div class="new-section-icon" style="background:#fffbeb;">📸</div>
+        <div class="new-section-title">Gallery / Media Archive</div>
+        <span class="new-section-tag">Medium Priority</span>
+      </div>
+      <div class="new-section-body">A filterable media gallery showing events by category: food drives, clothes distribution, menstrual hygiene awareness, education campaigns, and animal welfare. Organised by date and city. This gives prospective donors and interns a visual proof-of-work that text alone cannot provide.</div>
+    </div>
+
+    <div class="new-section-card">
+      <div class="new-section-header">
+        <div class="new-section-icon" style="background:#f0fdf4;">🗞️</div>
+        <div class="new-section-title">Blog / Stories Section</div>
+        <span class="new-section-tag">Medium Priority</span>
+      </div>
+      <div class="new-section-body">A blog where interns share their experiences, the team publishes drive summaries, and success stories of beneficiaries are documented. This creates SEO value (more indexed pages), emotional connection for visitors, and a living archive of the organisation's growth. LinkedIn already shows intern testimonials — bring them onto the site.</div>
+    </div>
+
+    <div class="new-section-card">
+      <div class="new-section-header">
+        <div class="new-section-icon" style="background:#fff1f2;">🤝</div>
+        <div class="new-section-title">CSR Partnerships & Sponsor Page</div>
+        <span class="new-section-tag">Medium Priority</span>
+      </div>
+      <div class="new-section-body">A dedicated page for corporate social responsibility collaborations. Include sponsorship tiers (Gold, Silver, Bronze), what each level funds, logos of past partners, and a contact form specifically for business enquiries. Many Indian companies have mandatory CSR budgets — this page could unlock significant funding.</div>
+    </div>
+
+    <div class="new-section-card">
+      <div class="new-section-header">
+        <div class="new-section-icon" style="background:#fdf4ff;">📬</div>
+        <div class="new-section-title">Newsletter / Updates Subscription</div>
+        <span class="new-section-tag">Low Priority</span>
+      </div>
+      <div class="new-section-body">An email capture for monthly impact updates, upcoming drives, and volunteer opportunities. Building a subscriber list creates a direct communication channel that isn't dependent on social media algorithms. Even a simple Mailchimp-powered form would work.</div>
+    </div>
+  </section>
+
+  <hr class="divider" style="margin-top: 48px;">
+
+  <!-- ── REDESIGN PREVIEW ── -->
+  <section id="redesign">
+    <div class="section-eyebrow">Section 05 · Redesign Vision</div>
+    <h2 class="section-title">Proposed Redesign — Homepage Preview 🎨</h2>
+    <p class="section-intro">This wireframe-quality mockup shows how a redesigned NayePankh homepage could look, incorporating the suggested improvements: impact counters, cleaner navigation, professional hierarchy, and clear CTAs.</p>
+
+    <div class="mockup-frame">
+      <div class="mockup-bar">
+        <span class="mockup-dot" style="background:#ff5f56;"></span>
+        <span class="mockup-dot" style="background:#ffbd2e;"></span>
+        <span class="mockup-dot" style="background:#27c93f;"></span>
+        <span class="mockup-url">nayepankh.com — Proposed Redesign</span>
+      </div>
+      <div class="mockup-screen">
+        <div class="redesign-screen">
+          <!-- Nav -->
+          <div class="rd-nav">
+            <div class="rd-logo">🕊 NayePankh Foundation</div>
+            <div class="rd-nav-links">
+              <span class="rd-nav-link active">Home</span>
+              <span class="rd-nav-link">About</span>
+              <span class="rd-nav-link">Our Work</span>
+              <span class="rd-nav-link">Internships</span>
+              <span class="rd-nav-link">Media</span>
+            </div>
+            <div class="rd-nav-cta">Donate Now →</div>
+          </div>
+
+          <!-- Hero -->
+          <div class="rd-hero">
+            <div class="rd-hero-left">
+              <div class="rd-hero-badge">UP GOVT. · 80G · 12A CERTIFIED</div>
+              <div class="rd-hero-h1">Giving Wings to the<br>Underprivileged</div>
+              <div class="rd-hero-sub">India's largest student-led NGO — distributing food, education, and dignity<br>across Kanpur, Ghaziabad, and growing. Founded by youth, for all.</div>
+              <div class="rd-hero-btns">
+                <div class="rd-btn-primary">Donate & Save Tax →</div>
+                <div class="rd-btn-secondary">Join as Intern</div>
+              </div>
+            </div>
+            <div class="rd-stats-bar" style="flex-direction:column; align-items:flex-end;">
+              <div class="rd-stat">
+                <div class="rd-stat-num">2L+</div>
+                <div class="rd-stat-label">People Helped</div>
+              </div>
+              <div class="rd-stat">
+                <div class="rd-stat-num">30K</div>
+                <div class="rd-stat-label">Interns Trained</div>
+              </div>
+              <div class="rd-stat">
+                <div class="rd-stat-num">5+</div>
+                <div class="rd-stat-label">Cities Active</div>
+              </div>
+              <div class="rd-stat">
+                <div class="rd-stat-num">2021</div>
+                <div class="rd-stat-label">Founded</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Impact row -->
+          <div class="rd-impact-row">
+            <div class="rd-impact-cell">
+              <div class="rd-impact-icon">🍛</div>
+              <div class="rd-impact-title">Food Drives</div>
+              <div class="rd-impact-desc">Free meals for underprivileged & stray animals</div>
+            </div>
+            <div class="rd-impact-cell">
+              <div class="rd-impact-icon">📚</div>
+              <div class="rd-impact-title">Education</div>
+              <div class="rd-impact-desc">Uniforms, books & school support</div>
+            </div>
+            <div class="rd-impact-cell">
+              <div class="rd-impact-icon">🩺</div>
+              <div class="rd-impact-title">Hygiene Awareness</div>
+              <div class="rd-impact-desc">Sanitary pads & menstrual health campaigns</div>
+            </div>
+          </div>
+
+          <!-- Progress bars -->
+          <div class="rd-progress-section">
+            <div class="rd-progress-title">This Month's Drive Progress</div>
+            <div class="rd-progress-item">
+              <div class="rd-progress-row"><span>Meals Target</span><span>750 / 1,000</span></div>
+              <div class="rd-progress-bar"><div class="rd-progress-fill" style="width:75%; background:#2563eb;"></div></div>
+            </div>
+            <div class="rd-progress-item">
+              <div class="rd-progress-row"><span>Clothes Collected</span><span>320 / 500</span></div>
+              <div class="rd-progress-bar"><div class="rd-progress-fill" style="width:64%; background:#0d9488;"></div></div>
+            </div>
+            <div class="rd-progress-item">
+              <div class="rd-progress-row"><span>Internship Applications</span><span>88 / 100</span></div>
+              <div class="rd-progress-bar"><div class="rd-progress-fill" style="width:88%; background:#d97706;"></div></div>
+            </div>
+          </div>
+
+          <div style="background: white; padding: 12px 20px; border-top: 1px solid #e5e7eb; font-size: 10px; color: #999; text-align: center;">
+            ✦ Proposed redesign concept — not live website
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 12px; padding: 20px; margin-top: 16px;">
+      <p style="font-size: 13px; color: #0369a1; font-weight: 500; margin-bottom: 6px;">🎨 Design Decisions in This Mockup</p>
+      <p style="font-size: 13px; color: #0c4a6e; line-height: 1.7;">Dark navy header conveys authority and trust. Impact stats are pulled into the hero for immediate context. Three clear cause pillars replace the scroll-heavy text blocks. Monthly progress bars create urgency and transparency. Dual CTAs separate "Donate" and "Intern" flows which currently conflate.</p>
+    </div>
+  </section>
+
+  <hr class="divider" style="margin-top: 48px;">
+
+  <!-- ── SUGGESTED PROJECT ── -->
+  <section id="project">
+    <div class="section-eyebrow">Section 06 · Recommended Front-End Project</div>
+    <h2 class="section-title">Build This: Intern Impact Tracker 🛠️</h2>
+    <p class="section-intro">If NayePankh were to build one front-end project that could transform their digital presence and operational impact simultaneously, this is it:</p>
+
+    <div class="project-card">
+      <div class="project-tag">⚡ Front-End Web App</div>
+      <h3 class="project-title">NayePankh Intern Dashboard & Public Impact Tracker</h3>
+      <p class="project-desc">A React-based web application (embeddable in the site) that gives each intern a personal dashboard to log their activities, and displays an aggregated public-facing impact tracker on the homepage. It solves three simultaneous problems: intern engagement, data collection, and donor transparency.</p>
+
+      <div class="project-features">
+        <div class="project-feature">
+          <div class="project-feature-title">🧑‍💼 Intern Login Portal</div>
+          <div class="project-feature-desc">Interns sign in with a unique ID, log their volunteer activities (meals distributed, drives attended, hours logged), and download their participation certificates automatically.</div>
+        </div>
+        <div class="project-feature">
+          <div class="project-feature-title">📊 Public Impact Dashboard</div>
+          <div class="project-feature-desc">The aggregated data from all interns renders as a live, animated dashboard visible to site visitors — showing total meals, clothes, hygiene kits distributed across all cities and events.</div>
+        </div>
+        <div class="project-feature">
+          <div class="project-feature-title">🗺️ City-wise Activity Map</div>
+          <div class="project-feature-desc">An interactive India map (using Leaflet.js or D3) showing drive locations plotted as pins, with pop-ups showing event details. Donors and media can instantly see geographic reach.</div>
+        </div>
+        <div class="project-feature">
+          <div class="project-feature-title">📜 Auto Certificate Generator</div>
+          <div class="project-feature-desc">After completing required hours/activities, interns get a downloadable PDF certificate auto-generated with their name, NGO seal, and activity summary — reducing admin load by 90%.</div>
+        </div>
+      </div>
+
+      <div class="project-impact-list">
+        <div class="project-impact-title">Why This Project · Impact Areas</div>
+        <div class="project-impact-items">
+          <div class="project-impact-item">📈 Reduces certificate admin work</div>
+          <div class="project-impact-item">🤝 Engages 30K+ interns digitally</div>
+          <div class="project-impact-item">💰 Increases donor confidence</div>
+          <div class="project-impact-item">🔍 Creates SEO-rich dynamic content</div>
+          <div class="project-impact-item">📱 Mobile-first responsive design</div>
+          <div class="project-impact-item">📊 Unlocks data-driven reporting</div>
+          <div class="project-impact-item">🏆 Differentiates from other NGOs</div>
+          <div class="project-impact-item">🛠 Buildable with React + Firebase</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 24px;">
+      <p style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 12px;">🔧 Suggested Tech Stack</p>
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;">
+        <div style="text-align: center; padding: 12px; background: var(--bg); border-radius: 8px; font-size: 12px; color: var(--ink-light);">
+          <div style="font-size: 20px; margin-bottom: 4px;">⚛️</div>
+          <strong style="color: var(--ink);">React.js</strong><br>Frontend UI
+        </div>
+        <div style="text-align: center; padding: 12px; background: var(--bg); border-radius: 8px; font-size: 12px; color: var(--ink-light);">
+          <div style="font-size: 20px; margin-bottom: 4px;">🔥</div>
+          <strong style="color: var(--ink);">Firebase</strong><br>Auth + Database
+        </div>
+        <div style="text-align: center; padding: 12px; background: var(--bg); border-radius: 8px; font-size: 12px; color: var(--ink-light);">
+          <div style="font-size: 20px; margin-bottom: 4px;">🗺️</div>
+          <strong style="color: var(--ink);">Leaflet.js</strong><br>Interactive Maps
+        </div>
+        <div style="text-align: center; padding: 12px; background: var(--bg); border-radius: 8px; font-size: 12px; color: var(--ink-light);">
+          <div style="font-size: 20px; margin-bottom: 4px;">📊</div>
+          <strong style="color: var(--ink);">Recharts</strong><br>Data Visualisation
+        </div>
+        <div style="text-align: center; padding: 12px; background: var(--bg); border-radius: 8px; font-size: 12px; color: var(--ink-light);">
+          <div style="font-size: 20px; margin-bottom: 4px;">📄</div>
+          <strong style="color: var(--ink);">jsPDF</strong><br>Certificate Gen
+        </div>
+        <div style="text-align: center; padding: 12px; background: var(--bg); border-radius: 8px; font-size: 12px; color: var(--ink-light);">
+          <div style="font-size: 20px; margin-bottom: 4px;">💅</div>
+          <strong style="color: var(--ink);">Tailwind CSS</strong><br>Styling
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" style="margin-top: 48px;">
+
+  <!-- ── SUMMARY ── -->
+  <section id="summary">
+    <div class="section-eyebrow">Section 07 · Summary</div>
+    <h2 class="section-title">All Recommendations at a Glance</h2>
+    <p class="section-intro">A prioritised action list across design fixes, new features, and long-term projects:</p>
+
+    <table class="summary-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Recommendation</th>
+          <th>Type</th>
+          <th>Priority</th>
+          <th>Effort</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Fix spelling errors (CERITIFICATES, etc.)</td>
+          <td>Fix</td>
+          <td><span class="priority-badge priority-high">High</span></td>
+          <td>30 mins</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Add working donation button with payment gateway</td>
+          <td>Feature</td>
+          <td><span class="priority-badge priority-high">High</span></td>
+          <td>1–2 days</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Replace WhatsApp images with quality photos</td>
+          <td>Design</td>
+          <td><span class="priority-badge priority-high">High</span></td>
+          <td>2–3 days</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>Add animated impact counter to homepage</td>
+          <td>Feature</td>
+          <td><span class="priority-badge priority-high">High</span></td>
+          <td>1 day</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>Rename & restructure navigation links</td>
+          <td>UX</td>
+          <td><span class="priority-badge priority-high">High</span></td>
+          <td>2 hrs</td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td>Revamp typography & colour palette</td>
+          <td>Design</td>
+          <td><span class="priority-badge priority-medium">Medium</span></td>
+          <td>1 week</td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td>Build Internship portal page with application form</td>
+          <td>New Section</td>
+          <td><span class="priority-badge priority-medium">Medium</span></td>
+          <td>1 week</td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td>Add Gallery / Media Archive page</td>
+          <td>New Section</td>
+          <td><span class="priority-badge priority-medium">Medium</span></td>
+          <td>3–5 days</td>
+        </tr>
+        <tr>
+          <td>9</td>
+          <td>Add Blog / Stories section</td>
+          <td>New Section</td>
+          <td><span class="priority-badge priority-medium">Medium</span></td>
+          <td>1 week</td>
+        </tr>
+        <tr>
+          <td>10</td>
+          <td>Create CSR Partnerships page</td>
+          <td>New Section</td>
+          <td><span class="priority-badge priority-medium">Medium</span></td>
+          <td>3 days</td>
+        </tr>
+        <tr>
+          <td>11</td>
+          <td>Add newsletter subscription</td>
+          <td>Feature</td>
+          <td><span class="priority-badge priority-low">Low</span></td>
+          <td>1 day</td>
+        </tr>
+        <tr>
+          <td>12</td>
+          <td><strong>Build Intern Dashboard & Impact Tracker app</strong></td>
+          <td>Project</td>
+          <td><span class="priority-badge priority-high">High</span></td>
+          <td>4–6 weeks</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div style="background: linear-gradient(135deg, #eff6ff, #f0fdf4); border: 1px solid #bfdbfe; border-radius: 12px; padding: 24px; margin-top: 24px;">
+      <p style="font-size: 15px; font-weight: 600; color: #1e40af; margin-bottom: 8px;">💡 Final Thought</p>
+      <p style="font-size: 14px; color: #1e3a5f; line-height: 1.75;">NayePankh Foundation has genuinely remarkable real-world impact — 2 lakh lives touched, 30,000 interns trained, national media coverage, and government certification. The website just hasn't caught up with that story yet. Fixing the foundational issues (images, typos, donations) would take a motivated team less than a week. The bigger vision — an Intern Impact Tracker — could set NayePankh apart as the most digitally transparent student-led NGO in India. The story is already there. The website just needs to tell it properly.</p>
+    </div>
+  </section>
+</div>
+
+<!-- ── FOOTER ── -->
+<div class="report-footer">
+  <div>
+    <span class="footer-brand">NayePankh Foundation Website Report</span><br>
+    Prepared June 2026 · Based on live site analysis of nayepankh.com
+  </div>
+  <div style="text-align: right;">
+    Sections: Overview · Strengths · Improvements<br>
+    New Features · Redesign Preview · Project Suggestion
+  </div>
+</div>
+
+</body>
+</html>
